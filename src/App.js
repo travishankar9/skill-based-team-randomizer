@@ -55,8 +55,8 @@ function About() {
                 level of each player/member involved. The app requires you enter
                 the names of the of the people involved along with a skill
                 rating ranging from 1-5 for each participant. You can also enter
-                your team names and the algorithm will then sort the players
-                into these teams, creating perfectly balanced teams!
+                your prefered team names and the algorithm will then sort the
+                players into these teams, ensuring they are perfectly balanced!
               </Typography>
             </p>
           </div>
@@ -75,16 +75,18 @@ function App() {
       <NavBar></NavBar>
       <About></About>
 
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item>
-          <PlayersForm setMembers={setMembers}></PlayersForm>
+      <Container>
+        <Grid container spacing={2} justifyContent="center">
+          <Grid item>
+            <PlayersForm setMembers={setMembers}></PlayersForm>
+          </Grid>
+          <Grid item>
+            <TeamsForm setFullTeams={setFullTeams}></TeamsForm>
+          </Grid>
         </Grid>
-        <Grid item>
-          <TeamsForm setFullTeams={setFullTeams}></TeamsForm>
-        </Grid>
-      </Grid>
 
-      <TeamsDisplay teams={fullTeam} players={members}></TeamsDisplay>
+        <TeamsDisplay teams={fullTeam} players={members}></TeamsDisplay>
+      </Container>
     </>
   );
 }
