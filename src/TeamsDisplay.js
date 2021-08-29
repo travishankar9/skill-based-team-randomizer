@@ -169,7 +169,7 @@ const TeamsDisplay = ({ teams, players }) => {
                           showAlert(
                             true,
                             "info",
-                            "Text has been copied to clipboard"
+                            "Team has been copied to clipboard"
                           );
                         }}
                       >
