@@ -52,7 +52,7 @@ function PlayersForm({ setMembers }) {
 
   useEffect(() => {
     setMembers(list);
-  }, [list]);
+  }, [list, setMembers]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -157,7 +157,6 @@ function PlayersForm({ setMembers }) {
                   getAriaValueText={valuetext}
                   aria-labelledby="discrete-slider"
                   valueLabelDisplay="auto"
-                  marks
                   onChange={handleChange}
                 ></Slider>
               </div>

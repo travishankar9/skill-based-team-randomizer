@@ -6,7 +6,12 @@ import {
   Paper,
   Typography,
   Card,
+  IconButton,
 } from "@material-ui/core";
+
+import CustomAlert from "./CustomAlert";
+
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 
 const useStyles = makeStyles({
   buttonContainer: {
@@ -50,22 +55,31 @@ const useStyles = makeStyles({
 
 const TeamsDisplay = ({ teams, players }) => {
   const [finalTeams, setFinalTeams] = useState([]);
+  const [alert, setAlert] = useState({
+    show: false,
+    severity: "",
+    msg: "",
+  });
   const classes = useStyles();
   let sortedPlayers, sortedfinalTeams;
 
+  const showAlert = (show = false, severity = "", msg = "") => {
+    setAlert({ show, severity, msg });
+  };
+
   useEffect(() => {
     setFinalTeams([]);
-    sortedPlayers = null;
-    sortedfinalTeams = null;
+    // sortedPlayers = null;
+    // sortedfinalTeams = null;
   }, [players, teams]);
 
   // console.log(teams, "teams before sort");
-  console.log(players, "players before sort ");
+  // console.log(players, "players before sort ");
 
   const generateTeams = () => {
     sortedPlayers = JSON.parse(JSON.stringify(players));
-    console.log(sortedPlayers[0], "sortedPlayers");
-    console.log(players[0], "players");
+    // console.log(sortedPlayers[0], "sortedPlayers");
+    // console.log(players[0], "players");
 
     sortedPlayers = sortedPlayers.sort((a, b) => {
       if (a.skill > b.skill) {
@@ -92,14 +106,14 @@ const TeamsDisplay = ({ teams, players }) => {
       });
 
       // console.log(teams, "teams after sort");
-      console.log(players[0], "players after sort ");
+      // console.log(players[0], "players after sort ");
 
       const skill = sortedPlayers[sortedPlayers.length - 1].skill;
       sortedfinalTeams[0].skillTotal += skill;
       sortedfinalTeams[0].players.push(sortedPlayers.pop());
 
-      console.log(sortedPlayers[0], "sortedPlayers after pop");
-      console.log(players[0], "players after pop");
+      // console.log(sortedPlayers[0], "sortedPlayers after pop");
+      // console.log(players[0], "players after pop");
     }
     setFinalTeams(sortedfinalTeams);
   };
@@ -129,11 +143,38 @@ const TeamsDisplay = ({ teams, players }) => {
           finalTeams.map((team) => {
             const { id, players, title, skillTotal } = team;
             return (
-              <Grid item>
+              <Grid item key={id}>
                 <Paper className={classes.paperContainer}>
+                  {alert.show && (
+                    <CustomAlert
+                      removeAlert={showAlert}
+                      {...alert}
+                    ></CustomAlert>
+                  )}
                   <div className={classes.teamTextContainer}>
                     <Typography variant="h3" className={classes.teamTitle}>
                       Team: {title.toUpperCase()}
+                      <IconButton
+                        color="secondary"
+                        onClick={() => {
+                          const teamName = title;
+                          const playerNames = players
+                            .map((player) => {
+                              return player.title;
+                            })
+                            .join("\n");
+
+                          const fullTeam = `Team: ${teamName} \n\n${playerNames}`;
+                          navigator.clipboard.writeText(fullTeam);
+                          showAlert(
+                            true,
+                            "info",
+                            "Text has been copied to clipboard"
+                          );
+                        }}
+                      >
+                        <FileCopyIcon></FileCopyIcon>
+                      </IconButton>
                     </Typography>
                     <Typography variant="body2" className={classes.teamSkill}>
                       Skill Level: {skillTotal}

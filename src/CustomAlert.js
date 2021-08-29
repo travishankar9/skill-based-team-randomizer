@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CustomAlert = ({ msg, severity, removeAlert, list }) => {
+const CustomAlert = ({ msg, severity, removeAlert, list = [] }) => {
   const classes = useStyles();
   useEffect(() => {
     const timeout = setTimeout(() => {

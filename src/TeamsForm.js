@@ -41,7 +41,7 @@ function TeamsForm({ setFullTeams }) {
 
   useEffect(() => {
     setFullTeams(list);
-  }, [list]);
+  }, [list, setFullTeams]);
 
   const showAlert = (show = false, severity = "", msg = "") => {
     setAlert({ show, severity, msg });
