@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function List({ items, removeItem, editItem }) {
+function List({ items, removeItem, editItem, refContainer }) {
   const classes = useStyles();
   return (
     <Grid>
@@ -46,7 +46,16 @@ function List({ items, removeItem, editItem }) {
                 >
                   <DeleteIcon></DeleteIcon>
                 </IconButton>
-                <IconButton color="primary" onClick={() => editItem(item.id)}>
+                <IconButton
+                  color="primary"
+                  onClick={() => {
+                    // console.log(
+                    //   "refcontainer"
+                    // );
+                    refContainer.current.children[1].children[0].focus();
+                    editItem(item.id);
+                  }}
+                >
                   <EditIcon></EditIcon>
                 </IconButton>
               </div>

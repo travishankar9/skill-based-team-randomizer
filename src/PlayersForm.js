@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Grid,
   Paper,
@@ -45,7 +45,7 @@ function PlayersForm({ setMembers }) {
     severity: "",
     msg: "",
   });
-
+  const refContainer = useRef(null);
   const showAlert = (show = false, severity = "", msg = "") => {
     setAlert({ show, severity, msg });
   };
@@ -136,6 +136,7 @@ function PlayersForm({ setMembers }) {
           <Grid container spacing={6} justifyContent="space-evenly">
             <Grid item>
               <TextField
+                ref={refContainer}
                 value={name}
                 variant="outlined"
                 label="Name of player"
@@ -172,7 +173,12 @@ function PlayersForm({ setMembers }) {
         </form>
 
         {list.length > 0 && (
-          <List items={list} editItem={editItem} removeItem={removeItem}></List>
+          <List
+            refContainer={refContainer}
+            items={list}
+            editItem={editItem}
+            removeItem={removeItem}
+          ></List>
         )}
       </Paper>
     </Grid>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   makeStyles,
   Grid,
@@ -38,7 +38,7 @@ function TeamsForm({ setFullTeams }) {
     severity: "",
     msg: "",
   });
-
+  const refContainer = useRef(null);
   useEffect(() => {
     setFullTeams(list);
   }, [list, setFullTeams]);
@@ -114,6 +114,7 @@ function TeamsForm({ setFullTeams }) {
           <Grid container spacing={6} justifyContent="space-evenly">
             <Grid item>
               <TextField
+                ref={refContainer}
                 value={name}
                 variant="outlined"
                 label="Name of Team"
@@ -132,7 +133,12 @@ function TeamsForm({ setFullTeams }) {
         </form>
 
         {list.length > 0 && (
-          <List items={list} editItem={editItem} removeItem={removeItem}></List>
+          <List
+            refContainer={refContainer}
+            items={list}
+            editItem={editItem}
+            removeItem={removeItem}
+          ></List>
         )}
       </Paper>
     </Grid>
