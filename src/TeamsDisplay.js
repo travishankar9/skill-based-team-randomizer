@@ -164,7 +164,6 @@ const TeamsDisplay = ({ teams, players }) => {
             const { id, players, title, skillTotal } = team;
             return (
               <Grid item key={id}>
-                {console.log(id, "id for each team")}
                 <Paper className={classes.paperContainer}>
                   {alert.show && alertId === id ? (
                     <CustomAlert
