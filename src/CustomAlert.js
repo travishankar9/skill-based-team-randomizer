@@ -18,7 +18,7 @@ const CustomAlert = ({ msg, severity, removeAlert, list = [] }) => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [list, removeAlert]);
+  }, [removeAlert, list]);
   return (
     <Alert className={classes.alert} severity={severity}>
       {msg}

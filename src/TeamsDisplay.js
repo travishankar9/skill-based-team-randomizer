@@ -60,6 +60,7 @@ const TeamsDisplay = ({ teams, players }) => {
     severity: "",
     msg: "",
   });
+  const [alertId, setAlertId] = useState(null);
   const classes = useStyles();
   let sortedPlayers, sortedfinalTeams;
 
@@ -128,7 +129,7 @@ const TeamsDisplay = ({ teams, players }) => {
 
     const fullTeam = `Team: ${teamName} \n\n${playerNames}`;
     navigator.clipboard.writeText(fullTeam);
-    showAlert(true, "info", `Team has been copied to clipboard ${title}`);
+    showAlert(true, "info", `Team has been copied to clipboard`);
   };
 
   return (
@@ -152,7 +153,12 @@ const TeamsDisplay = ({ teams, players }) => {
         </Grid>
       </Grid>
 
-      <Grid container spacing={3} justifyContent="center" alignItems="center">
+      <Grid
+        container
+        spacing={3}
+        justifyContent="space-evenly"
+        alignItems="center"
+      >
         {finalTeams.length > 0 &&
           finalTeams.map((team) => {
             const { id, players, title, skillTotal } = team;
@@ -160,18 +166,22 @@ const TeamsDisplay = ({ teams, players }) => {
               <Grid item key={id}>
                 {console.log(id, "id for each team")}
                 <Paper className={classes.paperContainer}>
-                  {alert.show && (
+                  {alert.show && alertId === id ? (
                     <CustomAlert
                       removeAlert={showAlert}
                       {...alert}
                     ></CustomAlert>
-                  )}
+                  ) : null}
+
                   <div className={classes.teamTextContainer}>
                     <Typography variant="h3" className={classes.teamTitle}>
                       Team: {title.toUpperCase()}
                       <IconButton
                         color="secondary"
-                        onClick={() => copyTeams(team)}
+                        onClick={() => {
+                          setAlertId(id);
+                          return copyTeams(team);
+                        }}
                       >
                         <FileCopyIcon></FileCopyIcon>
                       </IconButton>
