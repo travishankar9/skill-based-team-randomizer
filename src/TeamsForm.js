@@ -111,24 +111,29 @@ function TeamsForm({ setFullTeams }) {
               Teams
             </Typography>
           </div>
-          <Grid container spacing={6} justifyContent="space-evenly">
-            <Grid item>
-              <TextField
-                ref={refContainer}
-                value={name}
-                variant="outlined"
-                label="Name of Team"
-                placeholder="e.g. Barcelona"
-                onChange={(e) => setName(e.target.value)}
-              ></TextField>
+          <Grid container>
+            <Grid
+              container
+              spacing={6}
+              justifyContent="space-evenly"
+              alignItems="center"
+            >
+              <Grid item>
+                <TextField
+                  ref={refContainer}
+                  value={name}
+                  variant="outlined"
+                  label="Name of Team"
+                  placeholder="e.g. Barcelona"
+                  onChange={(e) => setName(e.target.value)}
+                ></TextField>
+              </Grid>
+              <Grid item>
+                <Button type="submit" variant="contained" color="primary">
+                  {isEditing ? "Edit Team" : "Add Team"}
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button type="submit" variant="contained" color="primary">
-                {isEditing ? "Edit Team" : "Add Team"}
-              </Button>
-            </Grid>
-
-            <Grid></Grid>
           </Grid>
         </form>
 
