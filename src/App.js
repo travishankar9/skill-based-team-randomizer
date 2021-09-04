@@ -55,7 +55,7 @@ function About() {
                 level of each player/member involved. The app requires you enter
                 the names of the of the people involved along with a skill
                 rating ranging from 1-5 for each participant. You can also enter
-                your prefered team names and the algorithm will then sort the
+                your preferred team names and the algorithm will then sort the
                 players into these teams, ensuring they are perfectly balanced!
               </Typography>
             </p>
