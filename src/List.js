@@ -28,13 +28,13 @@ const useStyles = makeStyles((theme) => ({
 function List({ items, removeItem, editItem, refContainer }) {
   const classes = useStyles();
   return (
-    <Grid>
+    <Grid item>
       {items.map((item) => {
         return (
           <Grid item key={item.id} justifyContent="center" alignItems="center">
             <Card className={classes.itemCard} raised>
               <div>
-                <Typography variant="h6">
+                <Typography variant="body1">
                   {item.title}
                   {item.skill ? ` - Skill level: ${item.skill}` : null}
                 </Typography>

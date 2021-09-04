@@ -117,6 +117,20 @@ const TeamsDisplay = ({ teams, players }) => {
     }
     setFinalTeams(sortedfinalTeams);
   };
+
+  const copyTeams = ({ title, players }) => {
+    const teamName = title;
+    const playerNames = players
+      .map((player) => {
+        return player.title;
+      })
+      .join("\n");
+
+    const fullTeam = `Team: ${teamName} \n\n${playerNames}`;
+    navigator.clipboard.writeText(fullTeam);
+    showAlert(true, "info", `Team has been copied to clipboard ${title}`);
+  };
+
   return (
     <>
       <Grid
@@ -144,6 +158,7 @@ const TeamsDisplay = ({ teams, players }) => {
             const { id, players, title, skillTotal } = team;
             return (
               <Grid item key={id}>
+                {console.log(id, "id for each team")}
                 <Paper className={classes.paperContainer}>
                   {alert.show && (
                     <CustomAlert
@@ -156,22 +171,7 @@ const TeamsDisplay = ({ teams, players }) => {
                       Team: {title.toUpperCase()}
                       <IconButton
                         color="secondary"
-                        onClick={() => {
-                          const teamName = title;
-                          const playerNames = players
-                            .map((player) => {
-                              return player.title;
-                            })
-                            .join("\n");
-
-                          const fullTeam = `Team: ${teamName} \n\n${playerNames}`;
-                          navigator.clipboard.writeText(fullTeam);
-                          showAlert(
-                            true,
-                            "info",
-                            "Team has been copied to clipboard"
-                          );
-                        }}
+                        onClick={() => copyTeams(team)}
                       >
                         <FileCopyIcon></FileCopyIcon>
                       </IconButton>

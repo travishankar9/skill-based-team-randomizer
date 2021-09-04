@@ -133,42 +133,47 @@ function PlayersForm({ setMembers }) {
               Players
             </Typography>
           </div>
-          <Grid container spacing={6} justifyContent="space-evenly">
-            <Grid item>
-              <TextField
-                ref={refContainer}
-                value={name}
-                variant="outlined"
-                label="Name of player"
-                placeholder="e.g. Messi"
-                onChange={(e) => setName(e.target.value)}
-              ></TextField>
+          <Grid container>
+            <Grid
+              container
+              justifyContent="space-evenly"
+              alignItems="center"
+              spacing={6}
+            >
+              <Grid item>
+                <TextField
+                  ref={refContainer}
+                  value={name}
+                  variant="outlined"
+                  label="Name of player"
+                  placeholder="e.g. Messi"
+                  onChange={(e) => setName(e.target.value)}
+                ></TextField>
+              </Grid>
+              <Grid item>
+                <div>
+                  <Typography id="discrete-slider" gutterBottom>
+                    Skill Level
+                  </Typography>
+                  <Slider
+                    value={skillLevel}
+                    step={1}
+                    marks
+                    min={1}
+                    max={5}
+                    getAriaValueText={valuetext}
+                    aria-labelledby="discrete-slider"
+                    valueLabelDisplay="auto"
+                    onChange={handleChange}
+                  ></Slider>
+                </div>
+              </Grid>
+              <Grid item>
+                <Button type="submit" variant="contained" color="primary">
+                  {isEditing ? "Edit Player" : "Add Player"}
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <div>
-                <Typography id="discrete-slider" gutterBottom>
-                  Skill Level
-                </Typography>
-                <Slider
-                  value={skillLevel}
-                  step={1}
-                  marks
-                  min={1}
-                  max={5}
-                  getAriaValueText={valuetext}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  onChange={handleChange}
-                ></Slider>
-              </div>
-            </Grid>
-            <Grid item>
-              <Button type="submit" variant="contained" color="primary">
-                {isEditing ? "Edit Player" : "Add Player"}
-              </Button>
-            </Grid>
-
-            <Grid></Grid>
           </Grid>
         </form>
 
